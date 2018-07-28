@@ -28,6 +28,7 @@
 		<string>ss</string>
 		<string>sch</string>
 		<string>rkt</string>
+		<string>hy</string>
 	</array>
 	<key>keyEquivalent</key>
 	<string>^~S</string>
@@ -155,7 +156,21 @@
 						(?&lt;=(\s|\(|\[)) # preceded by space or ( 
 						( do|or|and|else|quasiquote|begin|if|case|set!|
 						  cond|let|unquote|define|let\*|unquote-splicing|delay|
-						  letrec)
+						  letrec|
+						  #hy 
+						  .|-&gt;|-&gt;&gt;|and|as-&gt;|assert|assoc|break|comment|cond|
+						  dfor|setv|defclass|defn|
+						  continue|do|doc|#doc|
+						  defn/a|defmain|defmacro|defmacro/g!|defmacro!|
+						  deftag|del|doto|eval-and-compile|eval-when-compile|
+						  first|for|gensym|get|gfor|global|if|if\*|if-not|
+						  lif|lif-not|import|fn|fn/a|last|lfor|nonlocal|
+						  not|or|print|quasiquote|quote|require|
+						  rest|return|sfor|cut|raise|try|unless|
+						  unpack-iterable|unpack-mapping|unquote|
+						  unquote-splice|when|while|with|with/a|
+						  with-decorator|#@|with-gensyms|xor|yield|yield-from
+						  )
 						(?=(\s|\())</string>
 					<key>name</key>
 					<string>keyword.control.scheme</string>
@@ -252,6 +267,19 @@
 						  syntax|syntax-rules|transcript-off|transcript-on|
 						  truncate|unwrap-syntax|values-list|write|write-char|
 						  
+					      #hy core
+						  butlast|coll?|comp|complement|constantly|dec|
+						  disassemble|empty?|eval|every?|exec|float?|
+						  fraction|even?|identity|inc|instance?|integer?|
+						  interleave|interpose|iterable?|iterator?|juxt|
+						  keyword|keyword?|macroexpand|macroexpand-1|mangle|
+						  merge-with|name|neg?|none?|nth|numeric?|odd?|
+						  partition|pos?|second|some|string?|symbol?|zero?|
+						  #hy
+						  cycle|distinct|drop|drop-last|drop-while|filter|
+						  flatten|iterate|read|read-str|remove|repeat|
+						  repeatedly|take|take-nth|take-while|unmangle|
+
 						  # cons, car, cdr, etc
 						  cons|c(a|d){1,4}r| 
                           
@@ -493,7 +521,7 @@
 					<key>begin</key>
 					<string>(?x)
 						(?&lt;=\()       # preceded by (
-						(define)\s+   # define
+						(defn)\s+   # hy use defn not the define
 						(\()          # list of parameters
 						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)
 						  ((\s+
@@ -614,7 +642,7 @@
 				</dict>
 				<dict>
 					<key>begin</key>
-					<string>(?&lt;=\()(define)\s([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s*.*?</string>
+					<string>(?&lt;=\()(defn)\s([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s*.*?</string>
 					<key>captures</key>
 					<dict>
 						<key>1</key>
