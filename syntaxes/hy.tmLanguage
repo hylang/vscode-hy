@@ -24,16 +24,12 @@
 	</string>
 	<key>fileTypes</key>
 	<array>
-		<string>scm</string>
-		<string>ss</string>
-		<string>sch</string>
-		<string>rkt</string>
 		<string>hy</string>
 	</array>
 	<key>keyEquivalent</key>
 	<string>^~S</string>
 	<key>name</key>
-	<string>Scheme</string>
+	<string>Hy</string>
 	<key>patterns</key>
 	<array>
 		<dict>
@@ -771,7 +767,7 @@
 		</dict>
 	</dict>
 	<key>scopeName</key>
-	<string>source.scheme</string>
+	<string>source.hy</string>
 	<key>uuid</key>
 	<string>3EC2CFD0-909C-4692-AC29-1A60ADBC161E</string>
 </dict>

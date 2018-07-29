@@ -1,18 +1,18 @@
 {
-    "name": "vscode-scheme",
-    "displayName": "vscode-scheme",
-    "description": "Scheme language support for VSCode",
+    "name": "vscode-hy",
+    "displayName": "vscode-hy",
+    "description": "Hy language support for VSCode",
     "keywords": [
-        "scheme",
+        "hy",
         "syntax"
     ],
-    "version": "0.3.2",
-    "publisher": "sjhuangx",
+    "version": "0.0.1",
+    "publisher": "xuqinghan",
     "icon": "images/lambda.png",
-    "main": "./out/src/schemeMain",
+    "main": "./out/src/hyMain",
     "license": "MIT",
     "author": {
-        "name": "Allen Huang"
+        "name": "Qinghan Xu"
     },
     "engines": {
         "vscode": "^1.11.0"
@@ -22,45 +22,41 @@
         "Snippets"
     ],
     "activationEvents": [
-        "onLanguage:scheme"
+        "onLanguage:hy"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/sjhuangx/vscode-scheme.git"
+        "url": "https://github.com/xuqinghan/vscode-hy.git"
     },
     "bugs": {
-        "url": "https://github.com/sjhuangx/vscode-scheme/issues"
+        "url": "https://github.com/xuqinghan/vscode-hy/issues"
     },
-    "homepage": "https://github.com/sjhuangx/vscode-scheme",
+    "homepage": "https://github.com/xuqinghan/vscode-hy",
     "contributes": {
         "languages": [
             {
-                "id": "scheme",
+                "id": "hy",
                 "aliases": [
-                    "Scheme",
-                    "scheme"
+                    "Hy",
+                    "hy"
                 ],
                 "extensions": [
-                    ".scm",
-                    ".ss",
-                    ".sch",
-                    ".rkt",
                     ".hy"
                 ],
-                "configuration": "./scheme.configuration.json"
+                "configuration": "./hy.configuration.json"
             }
         ],
         "grammars": [
             {
-                "language": "scheme",
-                "scopeName": "source.scheme",
-                "path": "./syntaxes/scheme.tmLanguage"
+                "language": "hy",
+                "scopeName": "source.hy",
+                "path": "./syntaxes/hy.tmLanguage"
             }
         ],
         "snippets": [
             {
-                "language": "scheme",
-                "path": "./snippets/scheme.json"
+                "language": "hy",
+                "path": "./snippets/hy.json"
             }
         ]
     },
