@@ -6,6 +6,8 @@ This extension add Hy language support to VS Code.
 Hy is a wonderful dialect of Lisp that’s embedded in Python.
 [https://github.com/hylang/hy](https://github.com/hylang/hy)
 
+![](http://docs.hylang.org/en/master/_images/hy-logo-small.png)
+
 ## Credits
 
 This extension fork and reedit from a repo that sjhuangx's vscode-scheme to enable syntax on vscode.
