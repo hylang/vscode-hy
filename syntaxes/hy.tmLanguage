@@ -517,14 +517,17 @@
 					<key>begin</key>
 					<string>(?x)
 						(?&lt;=\()       # preceded by (
-						(defn)\s+   # hy use defn not the define
-						(\()          # list of parameters
-						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)
-						  ((\s+
-						    ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
-						   )*
-						  )\s*
-						(\))
+						(defn)   # defn
+						(\s+)     #function name     
+						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s+
+						\[ # list of parameters
+							((?:
+							([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
+							\s+
+							)*(?:
+							([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
+							)?)
+						(\])
 					</string>
 					<key>captures</key>
 					<dict>
@@ -578,15 +581,15 @@
 					<key>begin</key>
 					<string>(?x)
 						(?&lt;=\() # preceded by (
-						(lambda)\s+
-						(\() # opening paren
+						(fn)\s+
+						(\[) # opening paren
 						((?:
 						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
 						  \s+
 						)*(?:
 						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
 						)?)
-						(\)) # closing paren
+						(\]) # closing paren
 					</string>
 					<key>captures</key>
 					<dict>
