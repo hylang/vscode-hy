@@ -6,7 +6,7 @@
 		"hy",
 		"syntax"
 	],
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "xuqinghan",
 	"icon": "images/hy-logo-small.png",
 	"main": "./out/src/hyMain",

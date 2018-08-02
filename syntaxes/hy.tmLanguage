@@ -72,7 +72,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.whitespace.comment.leading.scheme</string>
+					<string>punctuation.whitespace.comment.leading.hy</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -87,13 +87,13 @@
 						<key>0</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.comment.scheme</string>
+							<string>punctuation.definition.comment.hy</string>
 						</dict>
 					</dict>
 					<key>end</key>
 					<string>\n</string>
 					<key>name</key>
-					<string>comment.line.semicolon.scheme</string>
+					<string>comment.line.semicolon.hy</string>
 				</dict>
 			</array>
 		</dict>
@@ -125,13 +125,13 @@
 					<key>match</key>
 					<string>#[t|f]</string>
 					<key>name</key>
-					<string>constant.language.boolean.scheme</string>
+					<string>constant.language.boolean.hy</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(?&lt;=[\(\s])((#e|#i)?[0-9]+(\.[0-9]+)?|(#x)[0-9a-fA-F]+|(#o)[0-7]+|(#b)[01]+)(?=[\s;()'",\[\]])</string>
 					<key>name</key>
-					<string>constant.numeric.scheme</string>
+					<string>constant.numeric.hy</string>
 				</dict>
 			</array>
 		</dict>
@@ -140,7 +140,7 @@
 			<key>match</key>
 			<string>[()\[\]]</string>
 			<key>name</key>
-			<string>invalid.illegal.parenthesis.scheme</string>
+			<string>invalid.illegal.parenthesis.hy</string>
 		</dict>
 		<key>language-functions</key>
 		<dict>
@@ -169,7 +169,7 @@
 						  )
 						(?=(\s|\())</string>
 					<key>name</key>
-					<string>keyword.control.scheme</string>
+					<string>keyword.control.hy</string>
 				</dict>
 				<dict>
 					<key>comment</key>
@@ -193,7 +193,7 @@
 						(?=(\s|\()) # followed by space or (
 					</string>
 					<key>name</key>
-					<string>support.function.boolean-test.scheme</string>
+					<string>support.function.boolean-test.hy</string>
 				</dict>
 				<dict>
 					<key>comment</key>
@@ -212,7 +212,7 @@
 						(?=(\s|\()) # followed by space or (					
 					</string>
 					<key>name</key>
-					<string>support.function.convert-type.scheme</string>
+					<string>support.function.convert-type.hy</string>
 				</dict>
 				<dict>
 					<key>comment</key>
@@ -231,7 +231,7 @@
 						(?=(\s|\()) # followed by space or (
 					</string>
 					<key>name</key>
-					<string>support.function.with-side-effects.scheme</string>
+					<string>support.function.with-side-effects.hy</string>
 				</dict>
 				<dict>
 					<key>comment</key>
@@ -245,7 +245,7 @@
 						(?=(\s|\()) # followed by space or (
 						</string>
 					<key>name</key>
-					<string>keyword.operator.arithmetic.scheme</string>
+					<string>keyword.operator.arithmetic.hy</string>
 				</dict>
 				<dict>
 					<key>match</key>
@@ -306,7 +306,7 @@
 						(?=(\s|\()) # followed by space or (
 					</string>
 					<key>name</key>
-					<string>support.function.general.scheme</string>
+					<string>support.function.general.hy</string>
 				</dict>
 			</array>
 		</dict>
@@ -330,7 +330,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.quoted.symbol.scheme</string>
+							<string>punctuation.section.quoted.symbol.hy</string>
 						</dict>
 					</dict>
 					<key>match</key>
@@ -339,7 +339,7 @@
 						([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)
 					</string>
 					<key>name</key>
-					<string>constant.other.symbol.scheme</string>
+					<string>constant.other.symbol.hy</string>
 				</dict>
 				<dict>
 					<key>captures</key>
@@ -347,22 +347,22 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.quoted.empty-list.scheme</string>
+							<string>punctuation.section.quoted.empty-list.hy</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>meta.expression.scheme</string>
+							<string>meta.expression.hy</string>
 						</dict>
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.expression.begin.scheme</string>
+							<string>punctuation.section.expression.begin.hy</string>
 						</dict>
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.expression.end.scheme</string>
+							<string>punctuation.section.expression.end.hy</string>
 						</dict>
 					</dict>
 					<key>match</key>
@@ -381,7 +381,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.quoted.scheme</string>
+							<string>punctuation.section.quoted.hy</string>
 						</dict>
 					</dict>
 					<key>comment</key>
@@ -389,7 +389,7 @@
 					<key>end</key>
 					<string>(?=[\s()])|(?&lt;=\n)</string>
 					<key>name</key>
-					<string>string.other.quoted-object.scheme</string>
+					<string>string.other.quoted-object.hy</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -409,7 +409,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.control.quote.scheme</string>
+					<string>keyword.control.quote.hy</string>
 				</dict>
 			</dict>
 			<key>comment</key>
@@ -418,7 +418,7 @@
 				will not be evaluated, so we are considering it a string.
 			</string>
 			<key>contentName</key>
-			<string>string.other.quote.scheme</string>
+			<string>string.other.quote.hy</string>
 			<key>end</key>
 			<string>(?=[\s)])|(?&lt;=\n)</string>
 			<key>patterns</key>
@@ -445,7 +445,7 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.expression.begin.scheme</string>
+							<string>punctuation.section.expression.begin.hy</string>
 						</dict>
 					</dict>
 					<key>end</key>
@@ -455,11 +455,11 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.section.expression.end.scheme</string>
+							<string>punctuation.section.expression.end.hy</string>
 						</dict>
 					</dict>
 					<key>name</key>
-					<string>meta.expression.scheme</string>
+					<string>meta.expression.hy</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -487,7 +487,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.expression.begin.scheme</string>
+					<string>punctuation.section.expression.begin.hy</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -497,16 +497,16 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.section.expression.end.scheme</string>
+					<string>punctuation.section.expression.end.hy</string>
 				</dict>
 				<key>2</key>
 				<dict>
 					<key>name</key>
-					<string>meta.after-expression.scheme</string>
+					<string>meta.after-expression.hy</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>meta.expression.scheme</string>
+			<string>meta.expression.hy</string>
 			<key>patterns</key>
 			<array>
 				<dict>
@@ -534,33 +534,33 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.control.scheme</string>
+							<string>keyword.control.hy</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.function.scheme</string>
+							<string>punctuation.definition.function.hy</string>
 						</dict>
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>entity.name.function.scheme</string>
+							<string>entity.name.function.hy</string>
 						</dict>
 						<key>4</key>
 						<dict>
 							<key>name</key>
-							<string>variable.parameter.function.scheme</string>
+							<string>variable.parameter.function.hy</string>
 						</dict>
 						<key>7</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.function.scheme</string>
+							<string>punctuation.definition.function.hy</string>
 						</dict>
 					</dict>
 					<key>end</key>
 					<string>(?=\))</string>
 					<key>name</key>
-					<string>meta.declaration.procedure.scheme</string>
+					<string>meta.declaration.procedure.hy</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -596,22 +596,22 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.control.scheme</string>
+							<string>keyword.control.hy</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.variable.scheme</string>
+							<string>punctuation.definition.variable.hy</string>
 						</dict>
 						<key>3</key>
 						<dict>
 							<key>name</key>
-							<string>variable.parameter.scheme</string>
+							<string>variable.parameter.hy</string>
 						</dict>
 						<key>6</key>
 						<dict>
 							<key>name</key>
-							<string>punctuation.definition.variable.scheme</string>
+							<string>punctuation.definition.variable.hy</string>
 						</dict>
 					</dict>
 					<key>comment</key>
@@ -622,7 +622,7 @@
 					<key>end</key>
 					<string>(?=\))</string>
 					<key>name</key>
-					<string>meta.declaration.procedure.scheme</string>
+					<string>meta.declaration.procedure.hy</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -647,18 +647,18 @@
 						<key>1</key>
 						<dict>
 							<key>name</key>
-							<string>keyword.control.scheme</string>
+							<string>keyword.control.hy</string>
 						</dict>
 						<key>2</key>
 						<dict>
 							<key>name</key>
-							<string>variable.other.scheme</string>
+							<string>variable.other.hy</string>
 						</dict>
 					</dict>
 					<key>end</key>
 					<string>(?=\))</string>
 					<key>name</key>
-					<string>meta.declaration.variable.scheme</string>
+					<string>meta.declaration.variable.hy</string>
 					<key>patterns</key>
 					<array>
 						<dict>
@@ -699,19 +699,19 @@
 					<key>match</key>
 					<string>(?&lt;=[\(\s])(#\\)(space|newline|tab)(?=[\s\)])</string>
 					<key>name</key>
-					<string>constant.character.named.scheme</string>
+					<string>constant.character.named.hy</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(?&lt;=[\(\s])(#\\)x[0-9A-F]{2,4}(?=[\s\)])</string>
 					<key>name</key>
-					<string>constant.character.hex-literal.scheme</string>
+					<string>constant.character.hex-literal.hy</string>
 				</dict>
 				<dict>
 					<key>match</key>
 					<string>(?&lt;=[\(\s])(#\\).(?=[\s\)])</string>
 					<key>name</key>
-					<string>constant.character.escape.scheme</string>
+					<string>constant.character.escape.hy</string>
 				</dict>
 				<dict>
 					<key>comment</key>
@@ -722,7 +722,7 @@
 					<key>match</key>
 					<string>(?&lt;=[ ()])\.(?=[ ()])</string>
 					<key>name</key>
-					<string>punctuation.separator.cons.scheme</string>
+					<string>punctuation.separator.cons.hy</string>
 				</dict>
 				<dict>
 					<key>include</key>
@@ -743,7 +743,7 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.string.begin.scheme</string>
+					<string>punctuation.definition.string.begin.hy</string>
 				</dict>
 			</dict>
 			<key>end</key>
@@ -753,18 +753,18 @@
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>punctuation.definition.string.end.scheme</string>
+					<string>punctuation.definition.string.end.hy</string>
 				</dict>
 			</dict>
 			<key>name</key>
-			<string>string.quoted.double.scheme</string>
+			<string>string.quoted.double.hy</string>
 			<key>patterns</key>
 			<array>
 				<dict>
 					<key>match</key>
 					<string>\\.</string>
 					<key>name</key>
-					<string>constant.character.escape.scheme</string>
+					<string>constant.character.escape.hy</string>
 				</dict>
 			</array>
 		</dict>

@@ -8,6 +8,10 @@ Hy is a wonderful dialect of Lisp that’s embedded in Python.
 
 ![](https://raw.githubusercontent.com/xuqinghan/vscode-hy/master/images/hy-logo-small.png)
 
+to get colorful brasket, install [Rainbow Brackets](https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets)
+
+
+
 ## Credits
 
 This extension fork and reedit from a repo that sjhuangx's vscode-scheme to enable syntax on vscode.
