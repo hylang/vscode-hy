@@ -154,6 +154,7 @@
 						  cond|let|unquote|define|let\*|unquote-splicing|delay|
 						  letrec|
 						  #hy 
+						  =|!=|&gt;=|&lt;=|&gt;|&lt;|
 						  .|-&gt;|-&gt;&gt;|and|as-&gt;|assert|assoc|break|comment|cond|
 						  dfor|setv|defclass|defn|
 						  continue|do|doc|#doc|
@@ -251,17 +252,18 @@
 					<key>match</key>
 					<string>(?x)
 						(?&lt;=(\s|\()) # preceded by space or (
-						( append|apply|approximate|
-						  call-with-current-continuation|call/cc|catch|
-						  construct-identifier|define-syntax|display|foo|
-						  for-each|force|format|cd|gen-counter|gen-loser|
-						  generate-identifier|last-pair|length|let-syntax|
-						  letrec-syntax|list|list-ref|list-tail|load|log|
-						  macro|magnitude|map|map-streams|max|member|memq|
-						  memv|min|newline|nil|not|peek-char|rationalize|
-						  read|read-char|return|reverse|sequence|substring|
-						  syntax|syntax-rules|transcript-off|transcript-on|
-						  truncate|unwrap-syntax|values-list|write|write-char|
+						( 
+						  #hy build in
+						  .|->|->>|and|as->|assert|assoc|break|comment|
+						  cond|continue|do|doc|#doc|dfor|setv|defclass|
+						  defn|defn/a|defmain|defmacro|defmacro/g!|defmacro!|
+						  deftag|del|doto|eval-and-compile|eval-when-compile|
+						  first|for|gensym|get|gfor|global|if|if*|if-not|
+						  import|fn|fn/a|last|lfor|nonlocal|not|or|print|
+						  quasiquote|quote|require|rest|return|sfor|cut|raise|
+						  try|unless|unpack-iterable|unpack-mapping|unquote|
+						  unquote-splice|when|while|with|with/a|with-decorator|
+						  with-gensyms|xor|yield|yield-from|#*|
 						  
 					      #hy core
 						  butlast|coll?|comp|complement|constantly|dec|
@@ -271,13 +273,14 @@
 						  keyword|keyword?|macroexpand|macroexpand-1|mangle|
 						  merge-with|name|neg?|none?|nth|numeric?|odd?|
 						  partition|pos?|second|some|string?|symbol?|zero?|
-						  #hy
+						  #hy Sequence
 						  cycle|distinct|drop|drop-last|drop-while|filter|
 						  flatten|iterate|read|read-str|remove|repeat|
 						  repeatedly|take|take-nth|take-while|unmangle|
 
-						  # cons, car, cdr, etc
-						  cons|c(a|d){1,4}r| 
+						  #py remove nouse and edundance
+						  False|None|True|as|in|is|lambda|nonlocal|not|pass|
+
                           
 						  # unary math operators
 						  abs|acos|angle|asin|assoc|assq|assv|atan|ceiling|
