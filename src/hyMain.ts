@@ -19,7 +19,7 @@ function newREPL(): Thenable<vscode.Terminal> {
 	terminal.sendText(hyBinary, true);
 	return vscode.window.withProgress({
 		location: vscode.ProgressLocation.Notification,
-		title: "Running Janet REPL...",
+		title: "Running Hy REPL...",
 		cancellable: false
 	}, (progress, token) => {
 		return new Promise<vscode.Terminal>(resolve => {
