@@ -1,24 +1,38 @@
 # Hy Language Support for Visual Studio Code
 
-This extension add Hy language support to VS Code.
+
+## Introduction
+
+This extension adds [Hy language](https://www.github.com/hylang/hy) support to VS Code. Features (presently) include basic syntax highlighting and the ability to evaluate expressions by sending them to a Hy REPL.
+
 ![](https://raw.githubusercontent.com/xuqinghan/vscode-hy/master/images/syntax_hy.PNG)
 
-Hy is a wonderful dialect of Lisp that’s embedded in Python.
-[https://github.com/hylang/hy](https://github.com/hylang/hy)
+Features:
+- [x] Basic syntax highlighting
+- [x] Basic Hy code snippets
+- [x] Code evaluation shortcuts
 
-![](https://raw.githubusercontent.com/xuqinghan/vscode-hy/master/images/hy-logo-small.png)
+Planned features:
+- [ ] Improved syntax highlighting
+- [ ] Auto-formatting on edit (esp. auto-indentation)
+- [ ] [Paredit](https://www.emacswiki.org/emacs/ParEdit)-style structural editing based on S-expressions (slurping, barfing, dragging, killing, rewrapping, splicing, raising, navigation, auto-balancing for parens and other wrappers `[({""})]`)
+- [ ] Intellisense code completion for built-in Hy functions and macros
 
-to get colorful brasket, install [Rainbow Brackets](https://marketplace.visualstudio.com/items?itemName=2gua.rainbow-brackets)
+## Installation
+
+### Local Install
+
+1. Navigate to your local .vscode (or .vscodium) extension directory (e.g. `$ cd ~/.vscode/extensions`)
+2. Clone this repo within that directory (e.g. `git clone https://www.github.com/hylang/vscode-hy`)
+3. Reload or relaunch any open VS Code/VS Codium windows
 
 
+## Contribution
+
+Issues and pull requests welcome.
 
 ## Credits
 
-This extension fork and reedit from a repo that sjhuangx's vscode-scheme to enable syntax on vscode.
-[https://github.com/sjhuangx/vscode-scheme](https://github.com/sjhuangx/vscode-scheme)
-
-This extension use a file that egrachev's sublime-scheme to enable syntax on vscode.
-
-[https://github.com/egrachev/sublime-scheme/blob/master/Scheme.tmLanguage](https://github.com/egrachev/sublime-scheme/blob/master/Scheme.tmLanguage)
+This extension is a fork and reedit of Allen Huang's [xuqinghan/vscode-hy](https://github.com/xuqinghan/vscode-hy) extension: Copyright (c) 2016 Allen Huang
 
 **Enjoy!**
