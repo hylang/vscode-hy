@@ -20,6 +20,15 @@
 				},
 				{
 					"include": "#strings"
+				},
+				{
+					"include": "#operators"
+				},
+				{
+					"include": "#keysym"
+				},
+				{
+					"include": "#symbol"
 				}
 			]
 		},
@@ -38,7 +47,13 @@
 		"keywords": {
 			"patterns": [{
 				"name": "keyword.control.hy",
-				"match": "\\b(if|while|for|return)\\b"
+				"match": "\\b(\\.|->|->>|and|as->|assert|assoc|break|comment|cond|continue|do|doc|#doc|dfor|setv|defclass|defn|defn\\/a|defmain|defmacro|defmacro\\/g!|defmacro!|deftag|del|doto|eval-and-compile|eval-when-compile|first|for|gensym|get|gfor|global|if|if\\*|if-not|import|fn|fn\\/a|last|lfor|nonlocal|not|or|print|quasiquote|quote|require|rest|return|sfor|cut|raise|try|unless|unpack-iterable|unpack-mapping|unquote|unquote-splice|when|while|with|with\\/a|with-decorator|with-gensyms|xor|yield|yield-from|butlast|coll\\?|comp|complement|constantly|dec|disassemble|empty\\?|eval|every\\?|exec|float\\?|fraction|even\\?|identity|inc|instance\\?|integer\\?|interleave|interpose|iterable\\?|iterator\\?|juxt|keyword|keyword\\?|macroexpand|macroexpand-1|mangle|merge-with|name|neg\\?|none\\?|nth|numeric\\?|odd\\?|partition|pos\\?|second|some|string\\?|symbol\\?|zero\\?|cycle|distinct|drop|drop-last|drop-while|filter|flatten|iterate|read|read-str|remove|repeat|repeatedly|take|take-nth|take-while|unmangle|False|None|True|as|in|is|lambda|nonlocal|not|pass|abs|all|any|ascii|bin|bool|bytearray|bytes|callable|chr|classmethod|compile|complex|delattr|dict|dir|divmod|enumerate|eval|exec|filter|float|format|frozenset|getattr|globals|hasattr|hash|help|hex|id|input|int|isinstance|issubclass|iter|len|list|locals|map|max|memoryview|min|next|object|oct|open|ord|pow|print|property|range|repr|reversed|round|set|setattr|slice|sorted|staticmethod|str|sum|super|tuple|type|vars|zip|__import__|abs|acos|angle|asin|assoc|assq|assv|atan|ceiling|cos|floor|round|sin|sqrt|tan|(?:real|imag)-part|numerator|denominatormodulo|exp|expt|remainder|quotient|lcm|call-with-(?:input|output)-file|(?:close|current)-(?:input|output)-port|with-(?:input|output)-from-file|open-(?:input|output)-file|char-(?:downcase|upcase|ready)|make-(?:polar|promise|rectangular|string|vector)|string(?:-(?:append|copy|length|ref))|vector(?:-length|-ref))[\\s\\)]"
+			}]
+		},
+		"operators":{
+			"patterns": [{
+				"name": "keyword.control.hy",
+				"match": "(?<=\\()\\s*([+\\/*-])"
 			}]
 		},
 		"strings": {
@@ -51,6 +66,14 @@
 					"match": "\\\\."
 				}
 			]
+		},
+		"keysym": {
+			"name": "variable.other.constant",
+			"match": "(?<![\\.:\\w_\\-=!@\\$%^&?\\/<>*]):[\\.:\\w_\\-=!@\\$%^&?\\/<>*]*"
+		},
+		"symbol": {
+			"name": "variable.other.hy",
+			"match": "(?<![\\.:\\w_\\-=!@\\$%^&?/<>*#])[\\.a-zA-Z_\\-=!@\\$%^<?/<>*#][\\.:\\w_\\-=!@\\$%^&?/<>*#]*"
 		}
 	},
 	"scopeName": "source.hy"
