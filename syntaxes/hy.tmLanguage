@@ -129,7 +129,7 @@
 				</dict>
 				<dict>
 					<key>match</key>
-					<string>(?&lt;=[\(\s])((#e|#i)?[0-9]+(\.[0-9]+)?|(#x)[0-9a-fA-F]+|(#o)[0-7]+|(#b)[01]+)(?=[\s;()'",\[\]])</string>
+					<string>(?&lt;=[\{\[\(\s])((#e|#i)?[0-9]+(\.[0-9]+)?|(#x)[0-9a-fA-F]+|(#o)[0-7]+|(#b)[01]+)(?=[\s;()'",\[\]\{\}])</string>
 					<key>name</key>
 					<string>constant.numeric.hy</string>
 				</dict>
@@ -149,19 +149,19 @@
 				<dict>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=([\(\[])) # by ( or [
+						(?&lt;=([\(])) # by (
 						(\s*) # Allow any amount of white space 
 						( do|or|and|else|quasiquote|begin|if|case|set!|
 						  cond|let|unquote|define|let\*|unquote-splicing|delay|
 						  letrec|
 						  #hy 
 						  =|!=|&gt;=|&lt;=|&gt;|&lt;|
-						  .|-&gt;|-&gt;&gt;|and|as-&gt;|assert|assoc|break|comment|cond|
+						  .|-&gt;|-&gt;&gt;|and|as-&gt;|assert|assoc|break|cond|
 						  dfor|setv|defclass|defn|
 						  continue|do|doc|#doc|
 						  defn/a|defmain|defmacro|defmacro/g!|defmacro!|
 						  deftag|del|doto|eval-and-compile|eval-when-compile|
-						  first|for|gensym|get|gfor|global|if|if\*|if-not|
+						  first|for|gensym|get|gfor|global|if|
 						  lif|lif-not|import|fn|fn/a|last|lfor|nonlocal|
 						  not|or|print|quasiquote|quote|require|
 						  rest|return|sfor|cut|raise|try|unless|
@@ -181,7 +181,8 @@
 					</string>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=(\s|\()) # preceded by space or (
+						(?&lt;=([\(])) # preceded by (
+						(\s*) # Allow any amount of white space 
 						( char-alphabetic|char-lower-case|char-numeric|
 						  char-ready|char-upper-case|char-whitespace|
 						  (?:char|string)(?:-ci)?(?:=|&lt;=?|&gt;=?)|
@@ -204,7 +205,8 @@
 					</string>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=(\s|\()) # preceded by space or (
+						(?&lt;=([\(])) # preceded by (
+						(\s*) # Allow any amount of white space 
 						( char-&gt;integer|exact-&gt;inexact|inexact-&gt;exact|
 						  integer-&gt;char|symbol-&gt;string|list-&gt;vector|
 						  list-&gt;string|identifier-&gt;symbol|vector-&gt;list|
@@ -225,7 +227,8 @@
 					</string>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=(\s|\()) # preceded by space or (
+						(?&lt;=([\(])) # preceded by (
+						(\s*) # Allow any amount of white space 
 						( set-(?:car|cdr)|				 # set car/cdr
 						  (?:vector|string)-(?:fill|set) # fill/set string/vector
 						)
@@ -242,7 +245,8 @@
 					</string>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=(\s|\()) # preceded by space or (
+						(?&lt;=([\(])) # preceded by (
+						(\s*) # Allow any amount of white space 
 						( &gt;=?|&lt;=?|=|[*/+-])
 						(?=(\s|\()) # followed by space or (
 						</string>
@@ -252,7 +256,8 @@
 				<dict>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=(\s|\()) # preceded by space or (
+						(?&lt;=([\(])) # preceded by (
+						(\s*) # Allow any amount of white space 
 						( 
 						  #hy build in
 						  .|->|->>|and|as->|assert|assoc|break|comment|
@@ -274,6 +279,7 @@
 						  keyword|keyword?|macroexpand|macroexpand-1|mangle|
 						  merge-with|name|neg?|none?|nth|numeric?|odd?|
 						  partition|pos?|second|some|string?|symbol?|zero?|
+						  
 						  #hy Sequence
 						  cycle|distinct|drop|drop-last|drop-while|filter|
 						  flatten|iterate|read|read-str|remove|repeat|
@@ -526,18 +532,18 @@
 				<dict>
 					<key>begin</key>
 					<string>(?x)
-						(?&lt;=\()       # preceded by (
-						(defn)   # defn
-						(\s+)     #function name     
-						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s+
-						\[ # list of parameters
+						(?&lt;=[\(])            # nc) preceded by (
+						(\s*defn|\s*defmacro)   # 1) defn or defmacro, ignores leading whitespace
+						(\s+)                   # 2) required whitespace          
+						  ([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*)\s+ # 3) function name
+						\[\s*
 							((?:
-							([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
+							([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|\#\*+|[._])
 							\s+
 							)*(?:
 							([[:alnum:]][[:alnum:]!$%&amp;*+-./:&lt;=&gt;?@^_~]*|[._])
-							)?)
-						(\])
+							)?) # 4) parameter list
+						(\]) # 7) Closing square bracket
 					</string>
 					<key>captures</key>
 					<dict>
@@ -705,10 +711,6 @@
 					<key>include</key>
 					<string>#string</string>
 				</dict>
-				<!-- <dict>
-					<key>include</key>
-					<string>#constants</string>
-				</dict> -->
 				<dict>
 					<key>match</key>
 					<string>(?&lt;=[\(\s])(#\\)(space|newline|tab)(?=[\s\)])</string>
