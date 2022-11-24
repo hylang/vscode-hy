@@ -11,9 +11,9 @@ Features:
 - [x] Basic syntax highlighting
 - [x] Basic Hy code snippets
 - [x] Code evaluation shortcuts
+- [x] Improved syntax highlighting
 
 Planned features:
-- [ ] Improved syntax highlighting
 - [ ] Auto-formatting on edit (esp. auto-indentation)
 - [ ] [Paredit](https://www.emacswiki.org/emacs/ParEdit)-style structural editing based on S-expressions (slurping, barfing, dragging, killing, rewrapping, splicing, raising, navigation, auto-balancing for parens and other wrappers `[({""})]`)
 - [ ] Intellisense code completion for built-in Hy functions and macros
