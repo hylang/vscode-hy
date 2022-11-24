@@ -149,7 +149,8 @@
 				<dict>
 					<key>match</key>
 					<string>(?x)
-						(?&lt;=(\s|\(|\[)) # preceded by space or ( 
+						(?&lt;=([\(\[])) # by ( or [
+						(\s*) # Allow any amount of white space 
 						( do|or|and|else|quasiquote|begin|if|case|set!|
 						  cond|let|unquote|define|let\*|unquote-splicing|delay|
 						  letrec|
@@ -694,16 +695,20 @@
 				</dict>
 				<dict>
 					<key>include</key>
+					<string>#constants</string>
+				</dict>
+				<dict>
+					<key>include</key>
 					<string>#language-functions</string>
 				</dict>
 				<dict>
 					<key>include</key>
 					<string>#string</string>
 				</dict>
-				<dict>
+				<!-- <dict>
 					<key>include</key>
 					<string>#constants</string>
-				</dict>
+				</dict> -->
 				<dict>
 					<key>match</key>
 					<string>(?&lt;=[\(\s])(#\\)(space|newline|tab)(?=[\s\)])</string>
