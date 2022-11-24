@@ -54,7 +54,7 @@
 			{
 				"language": "hy",
 				"scopeName": "source.hy",
-				"path": "./syntaxes/hy.tmLanguage"
+				"path": "./syntaxes/hy.tmLanguage.json"
 			}
 		],
 		"commands": [

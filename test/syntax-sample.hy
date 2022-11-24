@@ -5,7 +5,7 @@
 (defmacro hello [person]
   `(print "Hello there," ~person))
 
-(+ "hello " "world") ; => "hello world"
+(+ "hello " "world") ; = > "hello world"
 
 (setv mylist [1 2 3 4])
 (setv π 3.13159)
