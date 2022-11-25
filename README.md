@@ -5,7 +5,7 @@
 
 This extension adds [Hy language](https://www.github.com/hylang/hy) support to VS Code. Features (presently) include basic syntax highlighting and the ability to evaluate expressions by sending them to a Hy REPL.
 
-![](https://raw.githubusercontent.com/xuqinghan/vscode-hy/master/images/syntax_hy.PNG)
+![](https://raw.githubusercontent.com/hylang/vscode-hy/master/images/syntax_hy.PNG)
 
 Features:
 - [x] Basic syntax highlighting
