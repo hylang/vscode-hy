@@ -80,7 +80,7 @@
 				"type": "object",
 				"title": "Hy",
 				"properties": {
-					"Hy.keybindingsEnabled": {
+					"hy.keybindingsEnabled": {
 						"type": "boolean",
 						"description": "Activate keybindings.",
 						"default": true,
