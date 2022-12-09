@@ -95,6 +95,12 @@ function setKeybindingsEnabledContext() {
 	const keybindingsEnabled = vscode.workspace
 	  .getConfiguration()
 	  .get(config.KEYBINDINGS_ENABLED_CONFIG_KEY);
+	console.log("DEBUG: vscode = ", vscode);
+	console.log("DEBUG: vscode.workspace = ", vscode.workspace);
+	console.log("DEBUG: vscode.workspace.getConfiguration() = ", vscode.workspace.getConfiguration());
+	console.log("DEBUG: config.KEYBINDINGS_ENABLED_CONFIG_KEY = ", config.KEYBINDINGS_ENABLED_CONFIG_KEY);
+	console.log("DEBUG: vscode.workspace.getConfiguration().get(config.KEYBINDINGS_ENABLED_CONFIG_KEY) = ", vscode.workspace.getConfiguration().get(config.KEYBINDINGS_ENABLED_CONFIG_KEY));
+	console.log("DEBUG: keybindingsEnabled = ", keybindingsEnabled);
 	void vscode.commands.executeCommand(
 	  'setContext',
 	  config.KEYBINDINGS_ENABLED_CONTEXT_KEY,

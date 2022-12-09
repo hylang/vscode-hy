@@ -127,21 +127,21 @@
 				"title": "Calva-fmt",
 				"type": "object",
 				"properties": {
-					"calva.fmt.configPath": {
+					"hy.calva.fmt.configPath": {
 						"type": "string",
 						"markdownDescription": "Path to [cljfmt](https://github.com/weavejester/cljfmt#configuration) configuration file. Absolute or relative to the project root directory. To provide the config via [clojure-lsp](https://clojure-lsp.io), set this to `CLOJURE-LSP` (case sensitive)."
 					},
-					"calva.fmt.formatAsYouType": {
+					"hy.calva.fmt.formatAsYouType": {
 						"type": "boolean",
 						"default": true,
 						"description": "Auto-adjust indentation and format as you enter new lines."
 					},
-					"calva.fmt.newIndentEngine": {
+					"hy.calva.fmt.newIndentEngine": {
 						"type": "boolean",
 						"default": true,
 						"markdownDescription": "Use the structural editor for indentation (instead of `cljfmt`)."
 					},
-					"calva.fmt.keepCommentTrailParenOnOwnLine": {
+					"hy.calva.fmt.keepCommentTrailParenOnOwnLine": {
 						"type": "boolean",
 						"default": true,
 						"markdownDescription": "Treat `(comment...)` forms special and keep its closing paren on a line of its own."
@@ -523,37 +523,37 @@
 				"enablement": "editorLangId == hy"
 			},
 			{
-				"command": "calva-fmt.formatCurrentForm",
+				"command": "hy.calva-fmt.formatCurrentForm",
 				"title": "Format Current Form",
 				"category": "Hy Format",
 				"enablement": "editorLangId == hy"
 			},
 			{
-				"command": "calva-fmt.alignCurrentForm",
+				"command": "hy.calva-fmt.alignCurrentForm",
 				"title": "Format and Align Current Form (recursively, experimental)",
 				"category": "Hy Format",
 				"enablement": "editorLangId == hy"
 			},
 			{
-				"command": "calva-fmt.trimCurrentFormWhiteSpace",
+				"command": "hy.calva-fmt.trimCurrentFormWhiteSpace",
 				"title": "Format Current Form and trim space between forms",
 				"category": "Hy Format",
 				"enablement": "editorLangId == hy"
 			},
 			{
-				"command": "calva-fmt.inferParens",
+				"command": "hy.calva-fmt.inferParens",
 				"title": "Infer Parens (from the indentation)",
 				"category": "Hy Format",
 				"enablement": "editorLangId == hy"
 			},
 			{
-				"command": "calva-fmt.tabIndent",
+				"command": "hy.calva-fmt.tabIndent",
 				"title": "Indent Line",
 				"category": "Hy Format",
 				"enablement": "editorLangId == hy"
 			},
 			{
-				"command": "calva-fmt.tabDedent",
+				"command": "hy.calva-fmt.tabDedent",
 				"title": "Dedent Line",
 				"category": "Hy Format",
 				"enablement": "editorLangId == hy"
@@ -896,27 +896,27 @@
 				"when": "hy:keybindingsEnabled && editorLangId = hy && editorTextfocus && !hy:cursorInComment"
 			},
 			{
-				"command": "calva-fmt.formatCurrentForm",
+				"command": "hy.calva-fmt.formatCurrentForm",
 				"key": "tab",
 				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible && !hasOtherSuggestions && !inSnippetMode && !inlineSuggestionVisible"
 			},
 			{
-				"command": "calva-fmt.alignCurrentForm",
+				"command": "hy.calva-fmt.alignCurrentForm",
 				"key": "ctrl+alt+l",
 				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
 			},
 			{
-				"command": "calva-fmt.inferParens",
+				"command": "hy.calva-fmt.inferParens",
 				"key": "ctrl+alt+p i",
 				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
 			},
 			{
-				"command": "calva-fmt.tabIndent",
+				"command": "hy.calva-fmt.tabIndent",
 				"key": "ctrl+i",
 				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
 			},
 			{
-				"command": "calva-fmt.tabDedent",
+				"command": "hy.calva-fmt.tabDedent",
 				"key": "shift+tab",
 				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
 			}
@@ -931,7 +931,6 @@
 	"scripts": {
 		"vscode:prepublish": "tsc -p ./",
 		"compile": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "node ./node_modules/vscode/bin/test"
 	},
 	"dependencies": {
@@ -949,7 +948,6 @@
 		"@types/node": "^12.12.0",
 		"@types/vscode": "^1.34.0",
 		"mocha": "^10.1.0",
-		"typescript": "^4.0.0",
-		"vscode": "^1.0.0"
+		"typescript": "^4.7.4"
 	}
 }
