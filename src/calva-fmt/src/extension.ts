@@ -35,7 +35,7 @@ export async function activate(context: vscode.ExtensionContext) {
   );
   context.subscriptions.push(
     vscode.commands.registerTextEditorCommand(
-      'calva-fmt.formatCurrentForm',
+      'hy.calva-fmt.formatCurrentForm',
       formatter.formatPositionCommand
     )
   );
