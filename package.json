@@ -893,7 +893,7 @@
 			{
 				"command": "hy.continueComment",
 				"key": "enter",
-				"when": "hy:keybindingsEnabled && editorLangId = hy && editorTextfocus && !hy:cursorInComment"
+				"when": "hy:keybindingsEnabled && editorLangId = hy && editorTextfocus && hy:cursorInComment"
 			},
 			{
 				"command": "hy.calva-fmt.formatCurrentForm",
