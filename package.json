@@ -6,10 +6,10 @@
 		"hy",
 		"syntax"
 	],
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "hylang",
 	"icon": "images/hy-logo-small.png",
-	"main": "./out/src/hyMain",
+	"main": "./out/hyMain",
 	"license": "MIT",
 	"author": {
 		"name": "Caleb Figgers"
@@ -57,6 +57,98 @@
 				"path": "./syntaxes/hy.tmLanguage.json"
 			}
 		],
+		"configurationDefaults": {
+			"[hy]": {
+				"editor.wordSeparators": "\t ()\"':,;~@#$%^&{}[]`",
+				"editor.autoClosingBrackets": "always",
+				"editor.autoClosingQuotes": "always",
+				"editor.formatOnType": true,
+				"editor.autoIndent": "full",
+				"editor.formatOnPaste": true,
+				"files.trimTrailingWhitespace": false,
+				"editor.matchBrackets": "never",
+				"editor.guides.indentation": false,
+				"editor.parameterHints.enabled": false,
+				"editor.unicodeHighlight.allowedCharacters": {
+					" ": true,
+					"꞉": true
+				}
+			}
+		},
+		"configuration": [
+			{
+				"type": "object",
+				"title": "Hy",
+				"properties": {
+					"hy.keybindingsEnabled": {
+						"type": "boolean",
+						"description": "Activate keybindings.",
+						"default": true,
+						"scope": "window"
+					}
+				}
+			},
+			{
+				"type": "object",
+				"title": "Paredit",
+				"properties": {
+					"hy.paredit.defaultKeyMap": {
+						"type": "string",
+						"description": "The default keymap to use for bindings when there is no custom binding.",
+						"default": "strict",
+						"enum": [
+							"original",
+							"strict",
+							"none"
+						],
+						"scope": "window"
+					},
+					"hy.paredit.hijackVSCodeDefaults": {
+						"type": "boolean",
+						"markdownDescription": "When enabled, more VS Code built-in shortcuts are overridden with their ”corresponding” Paredit commands.",
+						"default": true,
+						"scope": "window"
+					},
+					"hy.paredit.strictPreventUnmatchedClosingBracket": {
+						"type": "boolean",
+						"markdownDescription": "Experimental: Prevents you from entering unmatched closing brackets when in `strict` mode. (Does not work when there is an active selection.)",
+						"default": false,
+						"scope": "window"
+					},
+					"hy.paredit.killAlsoCutsToClipboard": {
+						"type": "boolean",
+						"markdownDescription": "When enabled, replaces the clipboard content with the deleted code.",
+						"default": false,
+						"scope": "window"
+					}
+				}
+			},
+			{
+				"title": "Calva-fmt",
+				"type": "object",
+				"properties": {
+					"hy.calva.fmt.configPath": {
+						"type": "string",
+						"markdownDescription": "Path to [cljfmt](https://github.com/weavejester/cljfmt#configuration) configuration file. Absolute or relative to the project root directory. To provide the config via [clojure-lsp](https://clojure-lsp.io), set this to `CLOJURE-LSP` (case sensitive)."
+					},
+					"hy.calva.fmt.formatAsYouType": {
+						"type": "boolean",
+						"default": true,
+						"description": "Auto-adjust indentation and format as you enter new lines."
+					},
+					"hy.calva.fmt.newIndentEngine": {
+						"type": "boolean",
+						"default": true,
+						"markdownDescription": "Use the structural editor for indentation (instead of `cljfmt`)."
+					},
+					"hy.calva.fmt.keepCommentTrailParenOnOwnLine": {
+						"type": "boolean",
+						"default": true,
+						"markdownDescription": "Treat `(comment...)` forms special and keep its closing paren on a line of its own."
+					}
+				}
+			}
+		],
 		"commands": [
 			{
 				"command": "hy.startREPL",
@@ -69,6 +161,402 @@
 			{
 				"command": "hy.evalFile",
 				"title": "Hy: Evaluate file"
+			},
+			{
+				"command": "hy.continueComment",
+				"title": "Continue Comment (add a commented line below).",
+				"category": "Hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.togglemode",
+				"title": "Toggle Paredit Mode",
+				"when": "editorLangId == hy && paredit:keyMap =~ /original|strict/",
+				"enablement": "editorLangId == hy && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.forwardSexp",
+				"title": "Move Cursor Forward Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.backwardSexp",
+				"title": "Move Cursor Backward Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.forwardSexpOrUp",
+				"title": "Move Cursor Forward or Up Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.backwardSexpOrUp",
+				"title": "Move Cursor Backward or Up Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.forwardDownSexp",
+				"title": "Move Cursor Forward Down Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.backwardDownSexp",
+				"title": "Move Cursor Backward Down Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.backwardUpSexp",
+				"title": "Move Cursor Backward Up Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.forwardUpSexp",
+				"title": "Move Cursor Forward Up Sexp/Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.closeList",
+				"title": "Move Cursor Forward to List End/Close",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectForwardSexp",
+				"title": "Select Forward Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectRight",
+				"title": "Select Right",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectBackwardSexp",
+				"title": "Select Backward Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectForwardDownSexp",
+				"title": "Select Forward Down Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectBackwardDownSexp",
+				"title": "Select Backward Down Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectBackwardUpSexp",
+				"title": "Select Backward Up Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectForwardUpSexp",
+				"title": "Select Forward Up Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectBackwardSexpOrUp",
+				"title": "Select Backward Or Up Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectForwardSexpOrUp",
+				"title": "Select Forward Or Up Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectCloseList",
+				"title": "Select Forward to List End/Close",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.selectOpenList",
+				"title": "Select Backward to List Start/Open",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.rangeForDefun",
+				"title": "Select Current Top Level (aka defun) Form",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.sexpRangeExpansion",
+				"title": "Expand Selection",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.sexpRangeContraction",
+				"title": "Shrink Selection",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.slurpSexpForward",
+				"title": "Slurp Sexp Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.slurpSexpBackward",
+				"title": "Slurp Sexp Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.barfSexpForward",
+				"title": "Barf Sexp Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.barfSexpBackward",
+				"title": "Barf Sexp Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.spliceSexp",
+				"title": "Splice Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.splitSexp",
+				"title": "Split Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.joinSexp",
+				"title": "Join Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.raiseSexp",
+				"title": "Raise Sexp",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.transpose",
+				"title": "Transpose (Swap) the two Sexps Around the Cursor",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.dragSexprBackward",
+				"title": "Drag Sexp Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.dragSexprForward",
+				"title": "Drag Sexp Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.dragSexprBackwardUp",
+				"title": "Drag Sexp Backward Up",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.dragSexprForwardDown",
+				"title": "Drag Sexp Forward Down",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.dragSexprForwardUp",
+				"title": "Drag Sexp Forward Up",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.dragSexprBackwardDown",
+				"title": "Drag Sexp Backward Down",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.convolute",
+				"title": "Convolute Sexp ¯\\_(ツ)_/¯",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.killRight",
+				"title": "Kill/Delete Right",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.killSexpForward",
+				"title": "Kill/Delete Sexp Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.killSexpBackward",
+				"title": "Kill/Delete Sexp Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.killListForward",
+				"title": "Kill/Delete Forward to End of List",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.killListBackward",
+				"title": "Kill/Delete Backward to Start of List",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.spliceSexpKillForward",
+				"title": "Splice & Kill/Delete Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.spliceSexpKillBackward",
+				"title": "Splice & Kill/Delete Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.deleteForward",
+				"title": "Delete Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.deleteBackward",
+				"title": "Delete Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.forceDeleteForward",
+				"title": "Force Delete Forward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.forceDeleteBackward",
+				"title": "Force Delete Backward",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.wrapAroundParens",
+				"title": "Wrap Around ()",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.wrapAroundSquare",
+				"title": "Wrap Around []",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.wrapAroundCurly",
+				"title": "Wrap Around {}",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.wrapAroundQuote",
+				"title": "Wrap Around \"\"",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.rewrapParens",
+				"title": "Rewrap ()",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.rewrapSquare",
+				"title": "Rewrap []",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.rewrapCurly",
+				"title": "Rewrap {}",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"category": "Hy Paredit",
+				"command": "hy.paredit.rewrapQuote",
+				"title": "Rewrap \"\"",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"command": "hy.calva-fmt.formatCurrentForm",
+				"title": "Format Current Form",
+				"category": "Hy Format",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"command": "hy.calva-fmt.alignCurrentForm",
+				"title": "Format and Align Current Form (recursively, experimental)",
+				"category": "Hy Format",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"command": "hy.calva-fmt.trimCurrentFormWhiteSpace",
+				"title": "Format Current Form and trim space between forms",
+				"category": "Hy Format",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"command": "hy.calva-fmt.inferParens",
+				"title": "Infer Parens (from the indentation)",
+				"category": "Hy Format",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"command": "hy.calva-fmt.tabIndent",
+				"title": "Indent Line",
+				"category": "Hy Format",
+				"enablement": "editorLangId == hy"
+			},
+			{
+				"command": "hy.calva-fmt.tabDedent",
+				"title": "Dedent Line",
+				"category": "Hy Format",
+				"enablement": "editorLangId == hy"
 			}
 		],
 		"keybindings": [
@@ -79,6 +567,358 @@
 			{
 				"command": "hy.evalFile",
 				"key": "ctrl+alt+enter"
+			},
+			{
+				"command": "hy.paredit.togglemode",
+				"key": "ctrl+alt+p ctrl+alt+m",
+				"when": "editorLangId == hy && hy:keybindingsEnabled && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.backwardSexp",
+				"mac": "ctrl+left",
+				"win": "alt+left",
+				"linux": "alt+left",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorBeforeComment"
+			},
+			{
+				"command": "hy.paredit.backwardSexp",
+				"mac": "alt+left",
+				"win": "ctrl+left",
+				"linux": "ctrl+left",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorBeforeComment"
+			},
+			{
+				"command": "hy.paredit.forwardSexp",
+				"mac": "ctrl+right",
+				"win": "alt+right",
+				"linux": "alt+right",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorAfterComment"
+			},
+			{
+				"command": "hy.paredit.forwardSexp",
+				"mac": "alt+right",
+				"win": "ctrl+right",
+				"linux": "ctrl+right",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorAfterComment"
+			},
+			{
+				"command": "hy.paredit.forwardDownSexp",
+				"key": "ctrl+down",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.backwardDownSexp",
+				"key": "ctrl+alt+up",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.forwardUpSexp",
+				"key": "ctrl+alt+down",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.backwardUpSexp",
+				"key": "ctrl+up",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.closeList",
+				"key": "ctrl+end",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.openList",
+				"key": "ctrl+home",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectForwardSexp",
+				"mac": "shift+alt+right",
+				"win": "shift+ctrl+right",
+				"linux": "shift+ctrl+right",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectRight",
+				"mac": "ctrl+shift+k",
+				"win": "ctrl+k ctrl+shift+k",
+				"linux": "ctrl+k ctrl+shift+k",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !selectionAnchorSet && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectBackwardSexp",
+				"mac": "shift+alt+left",
+				"win": "shift+ctrl+left",
+				"linux": "shift+ctrl+left",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectForwardDownSexp",
+				"key": "ctrl+shift+down",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectBackwardDownSexp",
+				"key": "ctrl+shift+alt+up",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectForwardUpSexp",
+				"key": "ctrl+shift+alt+down",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectBackwardUpSexp",
+				"key": "ctrl+shift+up",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectCloseList",
+				"key": "ctrl+shift+end",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.selectOpenList",
+				"key": "ctrl+shift+home",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.rangeForDefun",
+				"key": "ctrl+alt+w space",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.sexpRangeExpansion",
+				"mac": "ctrl+w",
+				"win": "shift+alt+right",
+				"linux": "shift+alt+right",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.sexpRangeContraction",
+				"mac": "ctrl+shift+w",
+				"win": "shift+alt+left",
+				"linux": "shift+alt+left",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.slurpSexpForward",
+				"key": "ctrl+alt+win+right",
+				"linux": "ctrl+alt+.",
+				"when": "hy:keybindingsEnabled && editorLangId == hy"
+			},
+			{
+				"command": "hy.paredit.slurpSexpBackward",
+				"key": "ctrl+alt+win+left",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.barfSexpForward",
+				"key": "ctrl+alt+shift+left",
+				"linux": "ctrl+alt+,",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.barfSexpBackward",
+				"key": "ctrl+alt+shift+right",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.spliceSexp",
+				"key": "ctrl+alt+s",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.splitSexp",
+				"key": "ctrl+shift+s",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.joinSexp",
+				"key": "ctrl+shift+j",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.raiseSexp",
+				"key": "ctrl+alt+p ctrl+alt+r",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.transpose",
+				"key": "ctrl+alt+t",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.dragSexprBackward",
+				"key": "ctrl+shift+alt+b",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.dragSexprForward",
+				"key": "ctrl+shift+alt+f",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.dragSexprBackward",
+				"key": "alt+up",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.dragSexprForward",
+				"key": "alt+down",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.dragSexprBackwardUp",
+				"key": "ctrl+shift+alt+u",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.dragSexprForwardDown",
+				"key": "ctrl+shift+alt+d",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.dragSexprForwardUp",
+				"key": "ctrl+shift+alt+k",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.dragSexprBackwardDown",
+				"key": "ctrl+shift+alt+j",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.convolute",
+				"key": "ctrl+shift+c",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.killRight",
+				"mac": "ctrl+k",
+				"win": "ctrl+k ctrl+k",
+				"linux": "ctrl+k ctrl+k",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !selectionAnchorSet && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.killSexpForward",
+				"key": "ctrl+shift+delete",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.killSexpBackward",
+				"key": "ctrl+alt+backspace",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.killListForward",
+				"key": "ctrl+delete",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.killListBackward",
+				"key": "ctrl+backspace",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.spliceSexpKillForward",
+				"key": "ctrl+alt+shift+delete",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.spliceSexpKillBackward",
+				"key": "ctrl+alt+shift+backspace",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.wrapAroundParens",
+				"key": "ctrl+alt+shift+p",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.wrapAroundSquare",
+				"key": "ctrl+alt+shift+s",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.wrapAroundCurly",
+				"key": "ctrl+alt+shift+c",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.wrapAroundQuote",
+				"key": "ctrl+alt+shift+q",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.rewrapParens",
+				"key": "ctrl+alt+r ctrl+alt+p",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.rewrapSquare",
+				"key": "ctrl+alt+r ctrl+alt+s",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.rewrapCurly",
+				"key": "ctrl+alt+r ctrl+alt+c",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.rewrapQuote",
+				"key": "ctrl+alt+r ctrl+alt+q",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+			},
+			{
+				"command": "hy.paredit.deleteForward",
+				"key": "delete",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.deleteBackward",
+				"key": "backspace",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections && !hy:cursorInComment"
+			},
+			{
+				"command": "hy.paredit.forceDeleteForward",
+				"key": "alt+delete",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections"
+			},
+			{
+				"command": "hy.paredit.forceDeleteBackward",
+				"key": "alt+backspace",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap == strict && !editorReadOnly && !editorHasMultipleSelections"
+			},
+			{
+				"command": "hy.continueComment",
+				"key": "enter",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && hy:cursorInComment"
+			},
+			{
+				"command": "hy.calva-fmt.formatCurrentForm",
+				"key": "tab",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !inSnippetMode && !suggestWidgetVisible && !hasOtherSuggestions && !inSnippetMode && !inlineSuggestionVisible"
+			},
+			{
+				"command": "hy.calva-fmt.alignCurrentForm",
+				"key": "ctrl+alt+l",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
+			},
+			{
+				"command": "hy.calva-fmt.inferParens",
+				"key": "ctrl+alt+p i",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
+			},
+			{
+				"command": "hy.calva-fmt.tabIndent",
+				"key": "ctrl+i",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
+			},
+			{
+				"command": "hy.calva-fmt.tabDedent",
+				"key": "shift+tab",
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !editorReadOnly && !suggestWidgetVisible && !hasOtherSuggestions"
 			}
 		],
 		"snippets": [
@@ -91,15 +931,23 @@
 	"scripts": {
 		"vscode:prepublish": "tsc -p ./",
 		"compile": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "node ./node_modules/vscode/bin/test"
 	},
+	"dependencies": {
+		"@types/universal-analytics": "^0.4.2",
+        "acorn": "^6.4.1",
+		"immutable": "3.8.1",
+		"immutable-cursor": "2.0.1",
+		"lodash": "^4.17.19",
+		"lodash.isequal": "4.5.0",
+		"parinfer": "^3.12.0",
+		"universal-analytics": "^0.5.3",
+		"uuidv4": "6.2.12"
+	},
 	"devDependencies": {
-		"@types/mocha": "^2.2.32",
 		"@types/node": "^12.12.0",
 		"@types/vscode": "^1.34.0",
 		"mocha": "^10.1.0",
-		"typescript": "^4.0.0",
-		"vscode": "^1.0.0"
+		"typescript": "^4.7.4"
 	}
 }
