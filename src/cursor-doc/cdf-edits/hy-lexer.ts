@@ -61,8 +61,8 @@ toplevel.terminal(
   /[\f\u000B\u001C\u001D\u001E\u001F\u2028\u2029\u1680\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2008\u2009\u200a\u205f\u3000]+/,
   (l, m) => ({ type: 'ws' })
 );
-// comments -- 2022-07-06: Updated for hy comment syntax rather than Clojure (`#` instead of `;`)
-toplevel.terminal('comment', /#.*$/, (l, m) => ({ type: 'comment' }));
+// comments
+toplevel.terminal('comment', /;.*/, (l, m) => ({ type: 'comment' }));
 // Calva repl prompt, it contains special colon symbols and a hard space
 toplevel.terminal(
   'comment',
