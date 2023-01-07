@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.4 ()
+  -  
+
 ## 0.0.3 (Dec 20, 2022)
   - Added ParEdit-style structural editing
   - Added format-on-type (incl. auto-indentation)
