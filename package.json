@@ -562,11 +562,13 @@
 		"keybindings": [
 			{
 				"command": "hy.eval",
-				"key": "alt+enter"
+				"key": "alt+enter",
+				"when": "veditorLangId == hy && hy:keybindingsEnabled"
 			},
 			{
 				"command": "hy.evalFile",
-				"key": "ctrl+alt+enter"
+				"key": "ctrl+alt+enter",
+				"when": "editorLangId == hy && hy:keybindingsEnabled"
 			},
 			{
 				"command": "hy.paredit.togglemode",
