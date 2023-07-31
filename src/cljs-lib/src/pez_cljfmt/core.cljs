@@ -133,7 +133,7 @@
    :set "#{", :deref "@",  :reader-macro "#", :unquote "~"
    :var "#'", :quote "'",  :syntax-quote "`", :unquote-splicing "~@"
    ;; hy-specific options
-   :j-table "@{" :j-array "@[" :j-buffer "@\""
+  ;;  :j-table "@{" :j-array "@[" :j-buffer "@\""
    })
 
 (defn- prior-line-string [zloc]
@@ -247,7 +247,10 @@
 (def default-indents
   (merge (read-resource "cljfmt/indents/clojure.clj")
          (read-resource "cljfmt/indents/compojure.clj")
-         (read-resource "cljfmt/indents/fuzzy.clj")))
+         (read-resource "cljfmt/indents/fuzzy.clj")
+         {'with [[:block 1]]
+          'setv [[:inner 0]]
+          'match [[:block 1]]}))
 
 (defmulti ^:private indenter-fn
   (fn [sym alias-map [type & args]] type))
@@ -422,7 +425,7 @@
 
 (def ^:private binding-keywords
   #{"doseq" "let" "loop" "binding" "with-open" "go-loop" "if-let" "when-some"
-    "if-some" "for" "with-local-vars" "with-redefs" "when-let"})
+    "if-some" "for" "with-local-vars" "with-redefs" "when-let" "with"})
 
 (defn- binding? [zloc]
   (and (z/vector? zloc)
