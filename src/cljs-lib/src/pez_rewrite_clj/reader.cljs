@@ -36,7 +36,7 @@
   "Checks whether a given character is whitespace"
   [ch]
   ;(or (gstring/isBreakingWhitespace ch) (identical? \, ch))
-  (< -1 (.indexOf #js [\return \newline \tab \space ","] ch)))
+  (< -1 (.indexOf #js [\return \newline \tab \space] ch))) ; Updated for Hy 2023-07-31
 
 (defn ^boolean linebreak?
   "Checks whether the character is a newline"
@@ -46,7 +46,7 @@
 (defn ^boolean space?
   "Checks whether the character is a space"
   [c]
-  (< -1 (.indexOf #js [\tab \space ","] c)))
+  (< -1 (.indexOf #js [\tab \space] c)))
 
 (defn ^boolean whitespace-or-boundary?
   [c]
