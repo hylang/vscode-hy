@@ -2,7 +2,7 @@
   (:require [pez-rewrite-clj.node :as node]
             [pez-rewrite-clj.reader :as reader]
             [pez-rewrite-clj.parser.keyword :refer [parse-keyword]]
-            [pez-rewrite-clj.parser.string :refer [parse-string parse-regex]]
+            [pez-rewrite-clj.parser.string :refer [parse-string parse-regex parse-fstring]]
             [pez-rewrite-clj.parser.token :refer [parse-token]]
             [pez-rewrite-clj.parser.whitespace :refer [parse-whitespace]]
             [cljs.tools.reader.reader-types :refer [peek-char]]))
@@ -103,6 +103,11 @@
       (node/reader-macro-node (parse-printables reader :reader-macro 2)))))
 
 
+(defn parse-charf 
+  [^not-native reader]
+  (case (peek-char reader)
+    \" (parse-fstring reader)
+    (parse-token reader)))
 
 
 (defn- parse-unmatched
@@ -164,6 +169,7 @@
         (identical? c \@)               parse-deref
         (identical? c \")               parse-string
         (identical? c \:)               parse-keyword
+        (identical? c \f)               parse-charf
         :else                           parse-token))
 
 

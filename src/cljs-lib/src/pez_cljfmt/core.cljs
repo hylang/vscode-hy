@@ -1,5 +1,5 @@
 (ns pez-cljfmt.core
-  (:require [cljs.reader :as reader]
+  (:require #_[cljs.reader :as reader]
             [clojure.zip :as zip]
             [clojure.string :as str]
             [pez-rewrite-clj.node :as n]

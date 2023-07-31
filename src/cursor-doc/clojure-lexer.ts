@@ -71,7 +71,7 @@ toplevel.terminal(
 // (#[^\(\)\[\]\{\}"_@~\s,]+[\s,]*)*
 
 // open parens
-toplevel.terminal('open', /((?<=(^|[()[\]{}\s,]))['`~#@?^]\s*)*['`~#@?^]*[([{"]/, (l, m) => ({
+toplevel.terminal('open', /((?<=(^|[()[\]{}\s,]))['`~#@?^f]\s*)*['`~#@?^f]*[([{"]/, (l, m) => ({
   type: 'open',
 }));
 

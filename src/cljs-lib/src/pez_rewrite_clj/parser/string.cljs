@@ -39,3 +39,9 @@
   (let [lines (read-string-data reader)
         regex (string/join "\n" lines)]
     (node/token-node (re-pattern regex) (str "#\"" regex "\""))))
+
+(defn parse-fstring
+  [^not-native reader]
+  (let [lines (read-string-data reader)
+        content (string/join "\n" lines)]
+    (node/token-node content (str "f\"" content "\""))))

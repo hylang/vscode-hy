@@ -58,7 +58,7 @@
 		},
 		"strings": {
 			"name": "string.quoted.double.hy",
-			"begin": "\"",
+			"begin": "f?\"",
 			"end": "\"",
 			"patterns": [
 				{
