@@ -430,7 +430,7 @@ export function activate(context: ExtensionContext) {
 
   context.subscriptions.push(
     statusBar,
-    commands.registerCommand('paredit.togglemode', () => {
+    commands.registerCommand('hy.paredit.togglemode', () => {
       let keyMap = workspace.getConfiguration().get('hy.paredit.defaultKeyMap');
       keyMap = String(keyMap).trim().toLowerCase();
       if (keyMap == 'original') {
