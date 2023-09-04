@@ -152,20 +152,24 @@
 		"commands": [
 			{
 				"command": "hy.startREPL",
-				"title": "Hy: Start REPL"
+				"title": "Hy: Start REPL",
+				"enablement": "editorLangId == hy"
 			},
 			{
 				"command": "hy.eval",
-				"title": "Hy: Evaluate expression"
+				"title": "Hy: Evaluate expression",
+				"enablement": "editorLangId == hy"
 			},
 			{
 				"command": "hy.evalFile",
-				"title": "Hy: Evaluate file"
+				"title": "Hy: Evaluate file",
+				"enablement": "editorLangId == hy"
 			},
 			{
 				"command": "hy.continueComment",
 				"title": "Continue Comment (add a commented line below).",
-				"category": "Hy"
+				"category": "Hy",
+				"enablement": "editorLangId == hy"
 			},
 			{
 				"category": "Hy Paredit",
@@ -578,48 +582,48 @@
 				"mac": "ctrl+left",
 				"win": "alt+left",
 				"linux": "alt+left",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorBeforeComment"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.hy.paredit.hijackVSCodeDefaults && !editorHasMultipleSelections && !hy:cursorInComment || hy:cursorBeforeComment"
 			},
 			{
 				"command": "hy.paredit.backwardSexp",
 				"mac": "alt+left",
 				"win": "ctrl+left",
 				"linux": "ctrl+left",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorBeforeComment"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !editorHasMultipleSelections && !hy:cursorInComment || hy:cursorBeforeComment"
 			},
 			{
 				"command": "hy.paredit.forwardSexp",
 				"mac": "ctrl+right",
 				"win": "alt+right",
 				"linux": "alt+right",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorAfterComment"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !config.hy.paredit.hijackVSCodeDefaults && !editorHasMultipleSelections && !hy:cursorInComment || hy:cursorAfterComment"
 			},
 			{
 				"command": "hy.paredit.forwardSexp",
 				"mac": "alt+right",
 				"win": "ctrl+right",
 				"linux": "ctrl+right",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !hy:cursorInComment || hy:cursorAfterComment"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && config.hy.paredit.hijackVSCodeDefaults && !editorHasMultipleSelections && !hy:cursorInComment || hy:cursorAfterComment"
 			},
 			{
 				"command": "hy.paredit.forwardDownSexp",
 				"key": "ctrl+down",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.backwardDownSexp",
 				"key": "ctrl+alt+up",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.forwardUpSexp",
 				"key": "ctrl+alt+down",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.backwardUpSexp",
 				"key": "ctrl+up",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.closeList",
@@ -636,41 +640,41 @@
 				"mac": "shift+alt+right",
 				"win": "shift+ctrl+right",
 				"linux": "shift+ctrl+right",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectRight",
 				"mac": "ctrl+shift+k",
 				"win": "ctrl+k ctrl+shift+k",
 				"linux": "ctrl+k ctrl+shift+k",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !selectionAnchorSet && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && !selectionAnchorSet && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectBackwardSexp",
 				"mac": "shift+alt+left",
 				"win": "shift+ctrl+left",
 				"linux": "shift+ctrl+left",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectForwardDownSexp",
 				"key": "ctrl+shift+down",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectBackwardDownSexp",
 				"key": "ctrl+shift+alt+up",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectForwardUpSexp",
 				"key": "ctrl+shift+alt+down",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectBackwardUpSexp",
 				"key": "ctrl+shift+up",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.selectCloseList",
@@ -692,36 +696,36 @@
 				"mac": "ctrl+w",
 				"win": "shift+alt+right",
 				"linux": "shift+alt+right",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment && !editorHasMultipleSelections"
 			},
 			{
 				"command": "hy.paredit.sexpRangeContraction",
 				"mac": "ctrl+shift+w",
 				"win": "shift+alt+left",
 				"linux": "shift+alt+left",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !hy:cursorInComment && !editorHasMultipleSelections"
 			},
 			{
 				"command": "hy.paredit.slurpSexpForward",
 				"key": "ctrl+alt+win+right",
 				"linux": "ctrl+alt+.",
-				"when": "hy:keybindingsEnabled && editorLangId == hy"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.slurpSexpBackward",
 				"key": "ctrl+alt+win+left",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.barfSexpForward",
 				"key": "ctrl+alt+shift+left",
 				"linux": "ctrl+alt+,",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.barfSexpBackward",
 				"key": "ctrl+alt+shift+right",
-				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/"
+				"when": "hy:keybindingsEnabled && editorLangId == hy && editorTextFocus && paredit:keyMap =~ /original|strict/ && !editorHasMultipleSelections && !hy:cursorInComment"
 			},
 			{
 				"command": "hy.paredit.spliceSexp",
