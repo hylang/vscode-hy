@@ -1,6 +1,6 @@
 (ns pez-rewrite-clj.reader
   (:refer-clojure :exclude [peek next])
-  (:require [cdf-rewrite-cljs-reader.reader :as r]
+  (:require [cljs.tools.reader :as r]
             [cljs.tools.reader.reader-types :as reader-types]
             [cljs.tools.reader.impl.commons :refer [parse-symbol]]
             [goog.string :as gstring]

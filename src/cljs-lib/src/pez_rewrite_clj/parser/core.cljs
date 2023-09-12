@@ -105,9 +105,11 @@
 
 (defn parse-charf 
   [^not-native reader]
-  (case (peek-char reader)
-    \" (parse-fstring reader)
-    (parse-token reader)))
+  (reader/ignore reader)
+  (if (= (peek-char reader) \") 
+    (parse-fstring reader)
+    (do (reader/unread reader \f)
+        (parse-token reader))))
 
 
 (defn- parse-unmatched

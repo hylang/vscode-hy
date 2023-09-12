@@ -6,7 +6,7 @@
 		"hy",
 		"syntax"
 	],
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"publisher": "hylang",
 	"icon": "images/hy-logo-small.png",
 	"main": "./dist/extension.js",
