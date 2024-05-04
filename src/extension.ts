@@ -1,3 +1,4 @@
+import {spawnSync} from 'child_process';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
@@ -19,9 +20,42 @@ const windows: boolean = os.platform() == 'win32';
 const hyBinary: string = windows ? 'hy.exe' : 'hy';
 const terminalName = 'Hy REPL';
 
-function hyExists(): boolean {
-	return process.env['PATH'].split(path.delimiter)
-		.some((x) => fs.existsSync(path.resolve(x, hyBinary)));
+function hy_test(hy_path: string): boolean {
+	const cp = spawnSync(hy_path, ['-c', '(print (+ 1 2))']);
+	if (cp.error) {
+		vscode.window.showErrorMessage(`hy error: ${cp.error}`);
+		return false;
+	} else if (cp.stdout) {
+		return parseInt(cp.stdout.toString()) == 3;
+	} else {
+		return false;
+	}
+}
+
+async function hyExists(): Promise<boolean> {
+	// original test
+	if (process.env['PATH'].split(path.delimiter).some((x) => fs.existsSync(path.resolve(x, hyBinary)))) {
+		return true;
+	}
+
+	// venv test
+	const py_ext = vscode.extensions.getExtension('ms-python.python');
+	await py_ext.activate();
+	if (!py_ext.exports || !py_ext.exports.environments || !py_ext.exports.environments.known) {
+		vscode.window.showErrorMessage(`exports: ${JSON.stringify(py_ext)}`);
+	}
+	const venv = py_ext.exports.environments.known.find(o => o.internal
+		&& (o.internal.environment && o.internal.environment.type == 'VirtualEnvironment')
+		&& (o.internal.environment.folderUri && o.internal.environment.folderUri.path)
+		&& (o.internal.tools && o.internal.tools[0] == 'Venv')
+	);
+	if (venv) {
+		const hy_path = path.resolve(venv.internal.environment.folderUri.path, 'bin', hyBinary);
+		return fs.existsSync(hy_path) && hy_test(hy_path);
+	} else {
+		vscode.window.showWarningMessage(`no venv: ${JSON.stringify(py_ext.exports.environments.known)}`);
+		return false;
+	}
 }
 
 function newREPL(): Thenable<vscode.Terminal> {
@@ -102,11 +136,11 @@ function setKeybindingsEnabledContext() {
 	);
 }
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
 
     console.log('Extension "vscode-hy" is now active!');
 
-    if (!hyExists()) {
+    if (!await hyExists()) {
 		vscode.window.showErrorMessage('Can\'t find Hy language on your computer! Check your PATH variable.');
 		return;
 	}
