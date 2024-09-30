@@ -11,7 +11,10 @@ import * as config from './config';
 import * as whenContexts from './when-contexts';
 import * as edit from './edit';
 import annotations from './providers/annotations';
-import * as util from './utilities';
+// import * as util from './utilities';
+import * as evaluate from './evaluate';
+import { SelectionAndText } from './util/get-text';
+
 import * as state from './state';
 import status from './status';
 
@@ -136,6 +139,64 @@ function setKeybindingsEnabledContext() {
 	);
 }
 
+function sendToREPL(
+	f: (editor: vscode.TextEditor) => SelectionAndText,
+	ignoreSelection: boolean
+){
+    const editor = vscode.window.activeTextEditor;
+	if (editor == null) return;
+	const terminal: vscode.Terminal = vscode.window.terminals.find(x => x.name === terminalName);
+	const newTerminal = (terminal) ? false : true;
+	getREPL(true).then(terminal => {
+		function send(terminal: vscode.Terminal, text: string) {
+			sendSource(terminal, text);
+			if (!newTerminal) {
+				thenFocusTextEditor();
+			}
+		}
+		
+		if ((editor.selection.isEmpty) || ignoreSelection) {
+            const lineText = editor.document.lineAt(editor.selection.active.line).text;
+			const cursorPosition = editor.selection.active;
+			const cursorCharIndex = cursorPosition.character;
+			const textBeforeCursor = lineText.substring(0, cursorCharIndex);
+			const textAfterCursor = lineText.substring(cursorCharIndex);
+			const moveCursorBack = 
+				cursorCharIndex > 0 // Cursor not at far left margin
+				&& textAfterCursor.trim() === '' // After cursor is only spaces or nothing
+				&& /.*\)/.test(textBeforeCursor.trim()); // Character before cursor is a closed paren allowing whitespace
+			const moveCursorForward =
+				textAfterCursor.substring(0, 1) === '('
+				&& !moveCursorBack;
+			if (moveCursorBack) {
+				const newPosition = cursorPosition.with(cursorPosition.line, lineText.lastIndexOf(")"));
+				editor.selection = new vscode.Selection(newPosition, newPosition);
+			}
+			if (moveCursorForward) {
+				const newPosition = cursorPosition.with(cursorPosition.line, cursorPosition.character + 1);
+				editor.selection = new vscode.Selection(newPosition, newPosition);
+			}
+			
+			const selectionAndText = f(editor);
+			send(terminal, selectionAndText[1]);
+			annotations.decorateSelection(
+				selectionAndText[1],
+				selectionAndText[0],
+				editor,
+				editor.selection.active,
+				undefined,
+				annotations.AnnotationStatus.SUCCESS);
+
+			if (moveCursorBack || moveCursorForward) {
+				editor.selection = new vscode.Selection(cursorPosition, cursorPosition);
+			}
+		}
+			// vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
+		else
+			send(terminal, editor.document.getText(editor.selection));
+	});
+}
+
 export async function activate(context: vscode.ExtensionContext) {
 
     console.log('Extension "vscode-hy" is now active!');
@@ -155,18 +216,14 @@ export async function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand(
 		'hy.eval',
 		() => {
-			const editor = vscode.window.activeTextEditor;
-			if (editor == null) return;
-			getREPL(true).then(terminal => {
-				function send(terminal: vscode.Terminal) {
-					sendSource(terminal, editor.document.getText(editor.selection));
-					thenFocusTextEditor();
-				}
-				if (editor.selection.isEmpty)
-					vscode.commands.executeCommand('editor.action.selectToBracket').then(() => send(terminal));
-				else
-					send(terminal);
-			});
+			sendToREPL(evaluate._currentEnclosingFormText, false);
+		}
+	));
+
+    context.subscriptions.push(vscode.commands.registerCommand(
+		'hy.evalTopLevel',
+		() => {
+			sendToREPL(evaluate._currentTopLevelFormText, true);
 		}
 	));
 
