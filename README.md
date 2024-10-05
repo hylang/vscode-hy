@@ -31,6 +31,17 @@ Planned features:
 2. Clone this repo within that directory (e.g. `git clone https://www.github.com/hylang/vscode-hy`)
 3. Reload or relaunch any open VS Code/VS Codium windows
 
+## Latest Update
+
+### 0.0.9 (Oct 4, 2024)
+
+- Upgraded inline evaluation feature
+  - New "Evaluate top level expression" command (bound by default to `alt+shift+e`) 
+  - No longer loses cursor position when evaluating expressions
+  - Evaluated expressions are highlighted green; reen highlight remains until edits are made (even if cursor navigates away)
+- Overhauled syntax highlighting
+  - Now distinguish visually between builtins and macros
+
 ## Contribution
 
 Issues and pull requests welcome.

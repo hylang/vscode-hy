@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.0.9 (Oct 4, 2024)
+  - Upgraded inline evaluation feature
+    - New "Evaluate top level expression" command (bound by default to `alt+shift+e`) 
+    - No longer loses cursor position when evaluating expressions
+    - Evaluated expressions are highlighted green; reen highlight remains until edits are made (even if cursor navigates away)
+  - Overhauled syntax highlighting
+    - Now distinguish visually between builtins and macros
+
 ## 0.0.8 (Sep 12, 2023)
   - Fixed broken f-string reformatting
 
