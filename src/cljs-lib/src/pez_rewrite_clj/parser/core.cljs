@@ -85,22 +85,22 @@
 
 
 
-;; (defn- parse-sharp
-;;   [^not-native reader]
-;;   (reader/ignore reader)
-;;   (if (reader/whitespace? (peek-char reader))
-;;     (node/comment-node (reader/read-include-linebreak reader))
-;;     (case (peek-char reader)
-;;       nil (reader/throw-reader reader "Unexpected EOF.")
-;;       \{ (node/set-node (parse-delim reader \}))
-;;       \( (node/fn-node (parse-delim reader \)))
-;;       \" (parse-regex reader)
-;;       \^ (node/meta-node (parse-printables reader :meta 2 true))
-;;       \' (node/var-node (parse-printables reader :var 1 true))
-;;       \= (node/eval-node (parse-printables reader :eval 1 true))
-;;       \_ (node/uneval-node (parse-printables reader :uneval 1 true))
-;;       \? (parse-conditional reader)
-;;       (node/reader-macro-node (parse-printables reader :reader-macro 2)))))
+(defn- parse-sharp
+  [^not-native reader]
+  (reader/ignore reader)
+  (if (reader/whitespace? (peek-char reader))
+    (node/comment-node (reader/read-include-linebreak reader))
+    (case (peek-char reader)
+      nil (reader/throw-reader reader "Unexpected EOF.")
+      \{ (node/set-node (parse-delim reader \}))
+      \( (node/fn-node (parse-delim reader \)))
+      ;; \" (parse-regex reader)
+      ;; \^ (node/meta-node (parse-printables reader :meta 2 true))
+      ;; \' (node/var-node (parse-printables reader :var 1 true))
+      ;; \= (node/eval-node (parse-printables reader :eval 1 true))
+      \_ (node/uneval-node (parse-printables reader :uneval 1 true))
+      ;; \? (parse-conditional reader)
+      (node/reader-macro-node (parse-printables reader :reader-macro 2)))))
 
 
 (defn parse-charf 
@@ -147,6 +147,8 @@
 (defn- parse-comment
   [^not-native reader]
   (reader/ignore reader)
+  (js/console.log "Ping! `parse-comment` called")
+  (js/console.log "Next char is: " (peek-char reader))
   (node/comment-node (reader/read-include-linebreak reader)))
 
 
@@ -157,7 +159,7 @@
         (identical? c *delimiter*)      reader/ignore
         (reader/whitespace? c)          parse-whitespace
         (identical? c \^)               parse-meta
-        ;; (identical? c \#)               parse-sharp
+        (identical? c \#)               parse-sharp
         (identical? c \()               parse-list
         (identical? c \[)               parse-vector
         (identical? c \{)               parse-map
@@ -167,7 +169,7 @@
         (identical? c \~)               parse-unquote
         (identical? c \')               parse-quote
         (identical? c \`)               parse-syntax-quote
-        ;; (identical? c \;)               parse-comment
+        (identical? c \;)               parse-comment
         (identical? c \@)               parse-deref
         (identical? c \")               parse-string
         (identical? c \:)               parse-keyword
