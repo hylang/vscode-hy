@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.10 (Nov 3, 2024)
+  - Tweak to bracket autoclose rules
+  - Fixed formatter bugs (no longer confused by tuple syntax and comments)
+  - Fixed some syntax highlighting glitches
+
 ## 0.0.9 (Oct 4, 2024)
   - Upgraded inline evaluation feature
     - New "Evaluate top level expression" command (bound by default to `alt+shift+e`) 
